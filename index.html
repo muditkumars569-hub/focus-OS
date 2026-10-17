@@ -29,13 +29,12 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Custom thin scrollbars */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
   </style>
 </head>
-<body class="bg-[#080c14] text-slate-100 dark:bg-[#080c14] dark:text-slate-100 transition-colors duration-200 flex h-screen overflow-hidden font-sans">
+<body class="bg-[#080c14] text-slate-100 transition-colors duration-200 flex h-screen overflow-hidden font-sans">
 
   <!-- ==================== SIDEBAR ==================== -->
   <aside id="sidebar" class="w-64 border-r border-slate-800 bg-[#06090f] flex flex-col justify-between p-4 flex-shrink-0 transition-colors">
@@ -46,7 +45,7 @@
           <i data-lucide="crosshair" class="w-5 h-5 text-cyan-400"></i>
         </div>
         <div>
-          <h1 class="font-bold text-base tracking-wider text-slate-100 flex items-center gap-1.5">
+          <h1 id="brand-title" class="font-bold text-base tracking-wider text-slate-100 flex items-center gap-1.5">
             AURA OS <span class="text-[10px] px-1.5 py-0.2 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded font-mono">v4.0</span>
           </h1>
           <p class="text-[10px] text-slate-400 uppercase tracking-wider">Student Workspace</p>
@@ -76,7 +75,7 @@
 
     <!-- User Profile & Theme Switcher -->
     <div class="border-t border-slate-800/80 pt-4 space-y-3">
-      <!-- Light / Dark Mode Toggle -->
+      <!-- Light / Dark Mode Toggle Button -->
       <button onclick="toggleTheme()" class="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white transition">
         <span class="flex items-center gap-2">
           <i id="theme-icon" data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
@@ -90,7 +89,7 @@
           MS
         </div>
         <div class="overflow-hidden">
-          <p class="text-xs font-semibold text-slate-200 truncate">Mudit Sharma</p>
+          <p id="profile-name" class="text-xs font-semibold text-slate-200 truncate">Mudit Sharma</p>
           <p class="text-[10px] text-cyan-400 font-mono">BDS Student</p>
         </div>
       </div>
@@ -105,22 +104,21 @@
 
     <!-- ==================== VIEW 1: STUDY TRACKER ==================== -->
     <section id="view-study" class="space-y-6">
-      <!-- Top Stat Cards -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
+        <div class="panel-card p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
           <span class="text-[10px] uppercase text-slate-400 font-medium">Study Hours (Daily)</span>
-          <h3 class="text-xl font-bold mt-1 text-slate-100" id="hours-ratio">12.0 / 4.5 hrs</h3>
+          <h3 class="heading-text text-xl font-bold mt-1 text-slate-100">12.0 / 4.5 hrs</h3>
           <p class="text-[10px] text-emerald-400 font-mono mt-0.5">267% of weekly target achieved</p>
         </div>
 
-        <div class="p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
+        <div class="panel-card p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
           <span class="text-[10px] uppercase text-slate-400 font-medium">Study Target (Daily)</span>
-          <h3 class="text-xl font-bold mt-1 text-slate-100">4.5 <span class="text-sm font-normal text-slate-400">hrs</span></h3>
+          <h3 class="heading-text text-xl font-bold mt-1 text-slate-100">4.5 <span class="text-sm font-normal text-slate-400">hrs</span></h3>
           <p class="text-[10px] text-cyan-400 font-mono mt-0.5">78% of selected day achieved</p>
         </div>
 
-        <!-- Customizable Focus Timer Card -->
-        <div class="p-4 rounded-xl border border-slate-800/90 bg-[#0e1420] flex flex-col justify-between">
+        <!-- Customizable Focus Timer -->
+        <div class="panel-card p-4 rounded-xl border border-slate-800/90 bg-[#0e1420] flex flex-col justify-between">
           <div class="flex items-center justify-between">
             <span class="text-[10px] uppercase text-slate-400 font-medium">Focus Timer</span>
             <div class="flex items-center gap-1">
@@ -132,40 +130,39 @@
           </div>
           <div class="flex items-center justify-between mt-2">
             <div>
-              <h3 class="text-2xl font-bold text-slate-100 font-mono" id="stat-timer">25:00</h3>
+              <h3 class="heading-text text-2xl font-bold text-slate-100 font-mono" id="stat-timer">25:00</h3>
               <div class="flex items-center gap-1 mt-1">
-                <input type="number" id="custom-minutes" placeholder="Custom m" class="w-16 bg-[#080c14] border border-slate-800 rounded px-1.5 py-0.5 text-[10px] text-slate-200 outline-none">
+                <input type="number" id="custom-minutes" placeholder="Min" class="w-14 bg-[#080c14] border border-slate-800 rounded px-1.5 py-0.5 text-[10px] text-slate-200 outline-none">
                 <button onclick="applyCustomTimer()" class="text-[10px] px-1.5 py-0.5 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded">Set</button>
               </div>
             </div>
             <div class="flex flex-col gap-1">
-              <button id="quick-timer-btn" onclick="toggleTimer()" class="px-4 py-1.5 rounded-lg bg-cyan-500 text-slate-950 text-xs font-semibold hover:bg-cyan-400 transition">
+              <button id="quick-timer-btn" onclick="toggleTimer()" class="px-3.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 text-xs font-semibold hover:bg-cyan-400 transition">
                 Start
               </button>
-              <button onclick="resetTimer()" class="px-4 py-1 rounded-lg bg-slate-800 text-slate-300 text-[10px] hover:bg-slate-700 transition">
+              <button onclick="resetTimer()" class="px-3.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-[10px] hover:bg-slate-700 transition">
                 Reset
               </button>
             </div>
           </div>
         </div>
 
-        <div class="p-4 rounded-xl border border-slate-800/90 bg-[#0e1420] flex items-center justify-between">
+        <div class="panel-card p-4 rounded-xl border border-slate-800/90 bg-[#0e1420] flex items-center justify-between">
           <div>
             <span class="text-[10px] uppercase text-slate-400 font-medium">Current Streak</span>
-            <h3 class="text-xl font-bold mt-1 text-slate-100">12 <span class="text-sm font-normal text-slate-400">Days</span></h3>
+            <h3 class="heading-text text-xl font-bold mt-1 text-slate-100">12 <span class="text-sm font-normal text-slate-400">Days</span></h3>
             <p class="text-[10px] text-purple-400 font-mono mt-0.5">Consistency makes history!</p>
           </div>
           <i data-lucide="flame" class="w-6 h-6 text-purple-400"></i>
         </div>
       </div>
 
-      <!-- Mid Controls: Log Daily Hours + Study Task Bar -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Log Hours Box -->
-        <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
+        <!-- Log Hours -->
+        <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
           <div class="flex items-center gap-2">
             <i data-lucide="edit-3" class="w-4 h-4 text-cyan-400"></i>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Log / Update Daily Study Hours</h4>
+            <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200">Log / Update Daily Study Hours</h4>
           </div>
           <div class="space-y-3">
             <div>
@@ -190,35 +187,33 @@
           </div>
         </div>
 
-        <!-- Study Tasks Bar -->
-        <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] flex flex-col justify-between space-y-4">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-                <i data-lucide="check-square" class="w-4 h-4 text-cyan-400"></i> Study Tasks (Topics)
-              </h4>
-              <span id="study-task-badge" class="text-[10px] font-mono bg-purple-950 text-purple-300 border border-purple-800 px-2 py-0.5 rounded">1/2 Done</span>
-            </div>
-            <div class="flex gap-2">
-              <input type="text" id="new-study-task" placeholder="Add study task (e.g. Oral Pathology Ch 4)..." class="flex-1 bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-cyan-500">
-              <select id="new-study-priority" class="bg-[#080c14] border border-slate-800 rounded-lg px-2 py-2 text-xs text-slate-300">
-                <option value="High">High</option>
-                <option value="Med">Med</option>
-                <option value="Low">Low</option>
-              </select>
-              <button onclick="addStudyTask()" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-semibold text-xs rounded-lg">Add</button>
-            </div>
-            <div id="study-tasks-list" class="space-y-2 max-h-36 overflow-y-auto pr-1"></div>
+        <!-- Study Tasks -->
+        <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+              <i data-lucide="check-square" class="w-4 h-4 text-cyan-400"></i> Study Tasks (Topics)
+            </h4>
+            <span id="study-task-badge" class="text-[10px] font-mono bg-purple-950 text-purple-300 border border-purple-800 px-2 py-0.5 rounded">1/2 Done</span>
           </div>
+          <div class="flex gap-2">
+            <input type="text" id="new-study-task" placeholder="Add study topic (e.g., Dental Wax Carving)..." class="flex-1 bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-cyan-500">
+            <select id="new-study-priority" class="bg-[#080c14] border border-slate-800 rounded-lg px-2 py-2 text-xs text-slate-300">
+              <option value="High">High</option>
+              <option value="Med">Med</option>
+              <option value="Low">Low</option>
+            </select>
+            <button onclick="addStudyTask()" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-semibold text-xs rounded-lg">Add</button>
+          </div>
+          <div id="study-tasks-list" class="space-y-2 max-h-36 overflow-y-auto pr-1"></div>
         </div>
       </div>
 
-      <!-- Performance Curve Graph -->
-      <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-3">
+      <!-- Study Performance Curve -->
+      <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-3">
         <div class="flex items-center justify-between">
           <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Study Hours Analytics (Performance Trend)</h4>
-            <p class="text-[11px] text-slate-400">Track your weekly performance curve against set targets.</p>
+            <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200">Study Hours Analytics (Performance Trend)</h4>
+            <p class="text-[11px] text-slate-400">Track your weekly performance curve against targets.</p>
           </div>
           <span class="text-[10px] font-mono text-cyan-400 flex items-center gap-1">
             <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Live Chart
@@ -233,20 +228,19 @@
     <!-- ==================== VIEW 2: HABITS ROUTINE ==================== -->
     <section id="view-habits" class="hidden space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Add New Habit -->
-        <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+        <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
+          <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
             <i data-lucide="plus-circle" class="w-4 h-4 text-amber-400"></i> Add Daily Habit
           </h4>
-          <input type="text" id="new-habit-input" placeholder="e.g. Tooth Carving Practice, 20 MCQs..." class="w-full bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-amber-400">
+          <input type="text" id="new-habit-input" placeholder="e.g. Tooth Carving Practice..." class="w-full bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-amber-400">
           <button onclick="addHabit()" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs rounded-lg flex items-center justify-center gap-1">
             + Add Habit
           </button>
           
           <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
             <div>
-              <p class="text-[10px] uppercase text-slate-400">Today's Completion Rate</p>
-              <h3 class="text-xl font-bold text-slate-100 mt-1">68% <span class="text-xs font-normal text-slate-400">Done</span></h3>
+              <p class="text-[10px] uppercase text-slate-400">Today's Completion</p>
+              <h3 class="heading-text text-xl font-bold text-slate-100 mt-1">68% <span class="text-xs font-normal text-slate-400">Done</span></h3>
               <p class="text-[10px] text-amber-400 mt-0.5">Keep your consistency strong.</p>
             </div>
             <div class="w-12 h-12 rounded-full border-2 border-amber-400 flex items-center justify-center text-xs font-mono font-bold text-amber-400">
@@ -255,10 +249,9 @@
           </div>
         </div>
 
-        <!-- Radar Chart Container -->
-        <div class="lg:col-span-2 p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-2">
+        <div class="panel-card lg:col-span-2 p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-2">
           <div class="flex items-center justify-between mb-1">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Habit Radar Balance</h4>
+            <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200">Habit Radar Balance</h4>
             <div class="flex gap-2 text-[10px] font-mono">
               <span class="px-2 py-0.5 bg-slate-800 rounded text-slate-300">Mindfulness</span>
               <span class="px-2 py-0.5 bg-slate-800 rounded text-slate-300">Fitness</span>
@@ -272,12 +265,8 @@
         </div>
       </div>
 
-      <!-- Habit Checklist Table -->
-      <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
-        <div class="flex items-center justify-between">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Daily Habits Checklist / 7-Day Tracker</h4>
-          <span class="text-[10px] text-slate-400">Click checkboxes to sync progress</span>
-        </div>
+      <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
+        <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200">Daily Habits Checklist / 7-Day Tracker</h4>
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs">
             <thead>
@@ -301,36 +290,34 @@
 
     <!-- ==================== VIEW 3: EXPENSE TRACKER ==================== -->
     <section id="view-expenses" class="hidden space-y-6">
-      <!-- Top Stat Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
-          <span class="text-[10px] uppercase text-slate-400 font-medium">Monthly Income / Budget</span>
-          <h3 class="text-2xl font-bold mt-1 text-slate-100">₹15,000</h3>
+        <div class="panel-card p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
+          <span class="text-[10px] uppercase text-slate-400 font-medium">Monthly Budget</span>
+          <h3 class="heading-text text-2xl font-bold mt-1 text-slate-100">₹15,000</h3>
           <p class="text-[10px] text-slate-400 mt-0.5">Fixed allocation</p>
         </div>
-        <div class="p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
+        <div class="panel-card p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
           <span class="text-[10px] uppercase text-slate-400 font-medium">Total Expenses</span>
-          <h3 class="text-2xl font-bold mt-1 text-slate-100" id="total-expense-display">₹2,450</h3>
+          <h3 class="heading-text text-2xl font-bold mt-1 text-slate-100" id="total-expense-display">₹2,450</h3>
           <p class="text-[10px] text-slate-400 mt-0.5">Sum of all entries</p>
         </div>
-        <div class="p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
+        <div class="panel-card p-4 rounded-xl border border-slate-800/90 bg-[#0e1420]">
           <span class="text-[10px] uppercase text-slate-400 font-medium">Remaining Balance</span>
-          <h3 class="text-2xl font-bold mt-1 text-emerald-400" id="balance-display">₹12,550</h3>
+          <h3 class="heading-text text-2xl font-bold mt-1 text-emerald-400" id="balance-display">₹12,550</h3>
           <p class="text-[10px] text-slate-400 mt-0.5">Available to spend</p>
         </div>
       </div>
 
-      <!-- Expense Entry Form & Donut Chart Breakdown -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Add Expense & Category Box -->
-        <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+        <!-- Record Expense & Add Custom Category Form -->
+        <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
+          <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
             <i data-lucide="plus-circle" class="w-4 h-4 text-emerald-400"></i> Record Expense
           </h4>
           <div class="space-y-3">
             <div>
               <label class="text-[10px] text-slate-400 block mb-1">ITEM TITLE</label>
-              <input type="text" id="expense-name" placeholder="e.g. Tooth Casts, Burs, Coffee" class="w-full bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-400">
+              <input type="text" id="expense-name" placeholder="e.g. Dental Burs, Plaster" class="w-full bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-400">
             </div>
             <div>
               <label class="text-[10px] text-slate-400 block mb-1">AMOUNT IN ₹</label>
@@ -339,7 +326,7 @@
             <div>
               <label class="text-[10px] text-slate-400 block mb-1">CATEGORY</label>
               <select id="expense-category-select" class="w-full bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-300 outline-none focus:border-emerald-400">
-                <!-- Dynamically populated -->
+                <!-- Populated dynamically -->
               </select>
             </div>
             <button onclick="addExpense()" class="w-full py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs rounded-lg transition">
@@ -347,7 +334,7 @@
             </button>
           </div>
 
-          <!-- Add Custom Category -->
+          <!-- Customizable Category Section -->
           <div class="pt-3 border-t border-slate-800/80 space-y-2">
             <span class="text-[10px] font-medium text-slate-400 block">CREATE CUSTOM CATEGORY</span>
             <div class="flex gap-2">
@@ -357,21 +344,15 @@
           </div>
         </div>
 
-        <!-- Doughnut Chart with Centered Remaining Balance (2 cols) -->
-        <div class="lg:col-span-2 p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] flex flex-col justify-between relative">
+        <!-- Doughnut Chart (Dead-Center Rendered via Canvas Plugin) -->
+        <div class="panel-card lg:col-span-2 p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] flex flex-col justify-between">
           <div class="flex items-center justify-between mb-2">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Expense Breakdown by Category</h4>
+            <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200">Expense Breakdown by Category</h4>
             <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800" id="chart-total-badge">Total: ₹2,450</span>
           </div>
 
-          <!-- Chart Wrapper with Center Balance Text -->
-          <div class="h-64 flex items-center justify-center relative">
+          <div class="h-64 flex items-center justify-center relative w-full">
             <canvas id="expensePieChart"></canvas>
-            <!-- Center Balance Overlay inside Doughnut hole -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <span class="text-[10px] uppercase font-mono text-slate-400">Remaining</span>
-              <span class="text-base font-bold text-emerald-400 font-mono" id="donut-center-balance">₹12,550</span>
-            </div>
           </div>
 
           <div class="text-[10px] text-slate-400 text-center mt-2">
@@ -385,12 +366,11 @@
     <section id="view-notes" class="hidden space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <!-- Left Column: Calendar & General Tasks Bar -->
+        <!-- Left Column: Calendar & General Tasks -->
         <div class="space-y-6">
-          <!-- Calendar Matrix (October 2026) -->
-          <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
+          <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
             <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">October 2026</h4>
+              <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200">October 2026</h4>
               <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">Selected: Oct 17, 2026</span>
             </div>
             <div class="grid grid-cols-7 text-center text-[10px] text-slate-400 font-medium border-b border-slate-800 pb-2">
@@ -432,28 +412,27 @@
             </div>
           </div>
 
-          <!-- General Tasks / To-Do Bar (Replaces Daily Reflection & Wins Log) -->
-          <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
+          <!-- General Tasks / To-Dos Bar -->
+          <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-4">
             <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+              <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
                 <i data-lucide="list-todo" class="w-4 h-4 text-emerald-400"></i> General Tasks & To-Dos
               </h4>
               <span id="general-task-badge" class="text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded">1/2 Done</span>
             </div>
             <div class="flex gap-2">
-              <input type="text" id="new-general-task" placeholder="Add errand or personal task..." class="flex-1 bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-400">
+              <input type="text" id="new-general-task" placeholder="Add personal task or errand..." class="flex-1 bg-[#080c14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-400">
               <button onclick="addGeneralTask()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-semibold text-xs rounded-lg">Add</button>
             </div>
             <div id="general-tasks-list" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
           </div>
         </div>
 
-        <!-- Right Column: Quick Notes & Saved Notes Archive -->
+        <!-- Right Column: Quick Notes & Archive -->
         <div class="space-y-6">
-          <!-- Quick Notes & Snippets Editor -->
-          <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-3">
+          <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-3">
             <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+              <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
                 <i data-lucide="edit" class="w-4 h-4 text-cyan-400"></i> Quick Notes & Snippets
               </h4>
               <button onclick="saveNote()" class="px-2.5 py-1 bg-cyan-500 text-slate-950 font-semibold text-[11px] rounded flex items-center gap-1 hover:bg-cyan-400 transition">
@@ -465,10 +444,9 @@
             <p class="text-[9px] text-slate-500">Auto-saved locally. Saved notes persist in the archive below.</p>
           </div>
 
-          <!-- Saved Notes Archive Container -->
-          <div class="p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-3">
+          <div class="panel-card p-5 rounded-2xl border border-slate-800/90 bg-[#0e1420] space-y-3">
             <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+              <h4 class="heading-text text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
                 <i data-lucide="archive" class="w-4 h-4 text-purple-400"></i> Saved Notes Archive
               </h4>
               <span id="notes-count" class="text-[10px] font-mono text-slate-400">2 saved notes</span>
@@ -482,12 +460,11 @@
 
   </main>
 
-  <!-- ==================== APPLICATION SCRIPTS ==================== -->
+  <!-- ==================== JAVASCRIPT ==================== -->
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // 1. Navigation Switching
+    // Tab switcher
     function switchTab(viewId) {
       ['study', 'habits', 'expenses', 'notes'].forEach(v => {
         document.getElementById(`view-${v}`).classList.add('hidden');
@@ -499,32 +476,86 @@
       active.className = 'w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-medium bg-cyan-950/70 text-cyan-300 border border-cyan-800/80 transition-all';
     }
 
-    // 2. Light / Dark Theme Switcher
+    // High-contrast Light/Dark Mode Toggle
     let isDark = true;
     function toggleTheme() {
       isDark = !isDark;
       const html = document.documentElement;
+      const sidebar = document.getElementById('sidebar');
       const icon = document.getElementById('theme-icon');
       const text = document.getElementById('theme-text');
+      const cards = document.querySelectorAll('.panel-card');
+      const headings = document.querySelectorAll('.heading-text');
+      const inputs = document.querySelectorAll('input, select, textarea');
+
       if (isDark) {
         html.classList.add('dark');
-        document.body.style.backgroundColor = "#080c14";
-        document.body.style.color = "#f1f5f9";
+        document.body.className = "bg-[#080c14] text-slate-100 transition-colors duration-200 flex h-screen overflow-hidden font-sans";
+        sidebar.className = "w-64 border-r border-slate-800 bg-[#06090f] flex flex-col justify-between p-4 flex-shrink-0 transition-colors";
+        document.getElementById('brand-title').className = "font-bold text-base tracking-wider text-slate-100 flex items-center gap-1.5";
+        document.getElementById('profile-name').className = "text-xs font-semibold text-slate-200 truncate";
         icon.setAttribute('data-lucide', 'sun');
         icon.className = "w-4 h-4 text-amber-400";
         text.innerText = "Light Mode";
+
+        cards.forEach(c => {
+          c.style.backgroundColor = '#0e1420';
+          c.style.borderColor = '#1e293b';
+        });
+        headings.forEach(h => {
+          h.style.color = '#f1f5f9';
+        });
+        inputs.forEach(i => {
+          i.style.backgroundColor = '#080c14';
+          i.style.color = '#f8fafc';
+          i.style.borderColor = '#1e293b';
+        });
       } else {
         html.classList.remove('dark');
-        document.body.style.backgroundColor = "#f8fafc";
-        document.body.style.color = "#0f172a";
+        document.body.className = "bg-slate-100 text-slate-900 transition-colors duration-200 flex h-screen overflow-hidden font-sans";
+        sidebar.className = "w-64 border-r border-slate-300 bg-white flex flex-col justify-between p-4 flex-shrink-0 transition-colors";
+        document.getElementById('brand-title').className = "font-bold text-base tracking-wider text-slate-900 flex items-center gap-1.5";
+        document.getElementById('profile-name').className = "text-xs font-semibold text-slate-900 truncate";
         icon.setAttribute('data-lucide', 'moon');
-        icon.className = "w-4 h-4 text-slate-600";
+        icon.className = "w-4 h-4 text-slate-700";
         text.innerText = "Dark Mode";
+
+        cards.forEach(c => {
+          c.style.backgroundColor = '#ffffff';
+          c.style.borderColor = '#e2e8f0';
+        });
+        headings.forEach(h => {
+          h.style.color = '#0f172a';
+        });
+        inputs.forEach(i => {
+          i.style.backgroundColor = '#f8fafc';
+          i.style.color = '#0f172a';
+          i.style.borderColor = '#cbd5e1';
+        });
       }
+
+      // Update Chart Text & Grid Colors
+      const chartColor = isDark ? '#94a3b8' : '#334155';
+      const gridColor = isDark ? 'rgba(51, 65, 85, 0.3)' : 'rgba(203, 213, 225, 0.6)';
+
+      studyChart.options.scales.x.ticks.color = chartColor;
+      studyChart.options.scales.y.ticks.color = chartColor;
+      studyChart.options.scales.x.grid.color = gridColor;
+      studyChart.options.scales.y.grid.color = gridColor;
+      studyChart.options.plugins.legend.labels.color = chartColor;
+      studyChart.update();
+
+      habitRadar.options.scales.r.pointLabels.color = chartColor;
+      habitRadar.options.scales.r.grid.color = gridColor;
+      habitRadar.update();
+
+      expenseChart.options.plugins.legend.labels.color = chartColor;
+      expenseChart.update();
+
       lucide.createIcons();
     }
 
-    // 3. Study Hours Line / Curve Chart
+    // Study Hours Chart
     const ctxStudy = document.getElementById('studyHoursChart').getContext('2d');
     const studyChart = new Chart(ctxStudy, {
       type: 'line',
@@ -571,7 +602,7 @@
       alert(`Updated ${day} study hours to ${hrs}h!`);
     }
 
-    // 4. Focus Timer Logic (Customizable)
+    // Customizable Focus Timer
     let timerTotalSeconds = 25 * 60;
     let timerSeconds = 25 * 60;
     let timerRunning = false;
@@ -632,7 +663,7 @@
       }
     }
 
-    // 5. Habits Routine & Radar Balance
+    // Habits Routine & Radar
     const habitRadar = new Chart(document.getElementById('habitRadarChart').getContext('2d'), {
       type: 'radar',
       data: {
@@ -662,7 +693,7 @@
 
     let habits = [
       { name: "Morning Step Work (3 hours)", tag: "Clinical Practice", score: 100 },
-      { name: "Read 20 Pages (Technical / BDS Book)", tag: "Oral Pathology", score: 71 },
+      { name: "Read 20 Pages (Oral Pathology)", tag: "Oral Pathology", score: 71 },
       { name: "Solve 2 Viva / MCQ Sets", tag: "Exam Prep", score: 86 }
     ];
 
@@ -674,7 +705,7 @@
         tr.className = "hover:bg-slate-800/30 transition";
         tr.innerHTML = `
           <td class="py-3">
-            <p class="font-medium text-slate-200">${h.name}</p>
+            <p class="font-medium text-slate-200 heading-text">${h.name}</p>
             <span class="text-[9px] text-cyan-400 font-mono">${h.tag}</span>
           </td>
           <td class="text-center"><input type="checkbox" checked class="accent-cyan-400"></td>
@@ -700,7 +731,7 @@
       renderHabitsTable();
     }
 
-    // 6. Expense Tracker (Custom Categories + Rupee Amounts on Legend & Tooltips + Center Balance)
+    // Expense Tracker (Dead-Center Text Plugin + Customizable Categories)
     const incomeTotal = 15000;
     let expenseCategories = [
       { name: 'Transport', spent: 150, color: '#38bdf8' },
@@ -708,6 +739,40 @@
       { name: 'Utilities', spent: 800, color: '#f87171' },
       { name: 'Education / Study', spent: 1000, color: '#10b981' }
     ];
+
+    // Chart.js Plugin to draw text directly inside the doughnut center hole
+    const centerTextPlugin = {
+      id: 'centerTextPlugin',
+      afterDraw(chart) {
+        if (chart.config.type !== 'doughnut') return;
+        const { ctx } = chart;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta.data.length) return;
+
+        // Exactly get center coordinates calculated by Chart.js
+        const x = meta.data[0].x;
+        const y = meta.data[0].y;
+
+        const total = expenseCategories.reduce((s, c) => s + c.spent, 0);
+        const remaining = incomeTotal - total;
+
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Draw Subtitle: "REMAINING"
+        ctx.font = '600 10px monospace';
+        ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
+        ctx.fillText('REMAINING', x, y - 10);
+
+        // Draw Value: "₹12,550"
+        ctx.font = 'bold 17px monospace';
+        ctx.fillStyle = '#10b981';
+        ctx.fillText(`₹${remaining.toLocaleString()}`, x, y + 10);
+
+        ctx.restore();
+      }
+    };
 
     function populateCategoryDropdown() {
       const select = document.getElementById('expense-category-select');
@@ -723,6 +788,7 @@
     const ctxExpense = document.getElementById('expensePieChart').getContext('2d');
     const expenseChart = new Chart(ctxExpense, {
       type: 'doughnut',
+      plugins: [centerTextPlugin],
       data: {
         labels: expenseCategories.map(c => c.name),
         datasets: [{
@@ -740,7 +806,6 @@
             labels: {
               color: '#94a3b8',
               font: { size: 11 },
-              // Displays category name AND exact ₹ spent in legend
               generateLabels: function(chart) {
                 const data = chart.data;
                 if (data.labels.length && data.datasets.length) {
@@ -778,7 +843,6 @@
 
       document.getElementById('total-expense-display').innerText = `₹${total.toLocaleString()}`;
       document.getElementById('balance-display').innerText = `₹${remaining.toLocaleString()}`;
-      document.getElementById('donut-center-balance').innerText = `₹${remaining.toLocaleString()}`;
       document.getElementById('chart-total-badge').innerText = `Total: ₹${total.toLocaleString()}`;
 
       expenseChart.data.labels = expenseCategories.map(c => c.name);
@@ -818,7 +882,7 @@
       recalculateExpenses();
     }
 
-    // 7. Study Tasks & General Tasks Management
+    // Tasks Management
     let studyTasks = [
       { text: "Complete Oral Pathology Assignment", priority: "High", done: true },
       { text: "Revise Tooth Morphology & Wax Carvings", priority: "High", done: false }
@@ -840,7 +904,7 @@
         div.innerHTML = `
           <div class="flex items-center gap-2">
             <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleStudyTask(${i})" class="accent-cyan-400">
-            <span class="${t.done ? 'line-through text-slate-500' : 'text-slate-200'}">${t.text}</span>
+            <span class="${t.done ? 'line-through text-slate-500' : 'text-slate-200 heading-text'}">${t.text}</span>
           </div>
           <span class="text-[9px] px-1.5 py-0.5 rounded ${t.priority === 'High' ? 'bg-rose-950 text-rose-300' : 'bg-slate-800 text-slate-300'}">${t.priority}</span>
         `;
@@ -874,7 +938,7 @@
         div.innerHTML = `
           <div class="flex items-center gap-2">
             <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleGeneralTask(${i})" class="accent-emerald-400">
-            <span class="${t.done ? 'line-through text-slate-500' : 'text-slate-200'}">${t.text}</span>
+            <span class="${t.done ? 'line-through text-slate-500' : 'text-slate-200 heading-text'}">${t.text}</span>
           </div>
           <button onclick="deleteGeneralTask(${i})" class="text-slate-600 hover:text-rose-400 text-xs">✕</button>
         `;
@@ -901,7 +965,7 @@
       renderGeneralTasks();
     }
 
-    // 8. Saved Notes Archive (LocalStorage Connected)
+    // Saved Notes Archive
     let savedNotes = JSON.parse(localStorage.getItem('aura_bds_notes') || '[]');
     if (savedNotes.length === 0) {
       savedNotes = [
@@ -918,7 +982,7 @@
         item.className = "p-3 rounded-xl bg-[#080c14] border border-slate-800 space-y-1 relative";
         item.innerHTML = `
           <div class="flex items-center justify-between">
-            <h5 class="text-xs font-semibold text-slate-200">${n.title}</h5>
+            <h5 class="text-xs font-semibold text-slate-200 heading-text">${n.title}</h5>
             <span class="text-[9px] font-mono text-purple-400">${n.date}</span>
           </div>
           <p class="text-[11px] text-slate-400">${n.body}</p>
@@ -945,7 +1009,7 @@
       renderSavedNotes();
     }
 
-    // Initial Renders
+    // Initial Execution
     populateCategoryDropdown();
     recalculateExpenses();
     renderHabitsTable();
